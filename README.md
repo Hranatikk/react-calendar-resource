@@ -26,7 +26,7 @@ yarn add react-calendar-resource
 
 ```tsx
 import React from 'react';
-import ResourceCalendarTimeline from 'react-calendar-resource';
+import { ResourceCalendar } from 'react-calendar-resource';
 
 const data = [
   {
@@ -52,7 +52,6 @@ export default App;
 | Prop                | Type                                      | Description                                      |
 |---------------------|-----------------------------------------|--------------------------------------------------|
 | `data`             | `CalendarData[]`                        | List of resources with associated events.       |
-| `minuteStep`       | `number`                                | Step size in minutes for event positioning.     |
 | `selectedDate`     | `Date`                                  | Currently selected date in the calendar.        |
 | `containerStyle`   | `React.CSSProperties`                   | Custom styles for the calendar container.       |
 | `renderResource`   | `(resource: Resource) => React.ReactNode` | Function to render a resource item.             |

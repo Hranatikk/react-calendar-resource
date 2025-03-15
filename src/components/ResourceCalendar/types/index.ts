@@ -2,6 +2,7 @@ import type { ComponentProps, ReactNode } from "react"
 
 export type Resource = {
   title: string;
+  [key: string]: any;
 }
 
 export type CalendarEvent = {
@@ -34,9 +35,13 @@ export type DragData = {
   offsetX: number;
 } | null
 
+export type DragConstraintsProps = {
+  minuteStep?: number;
+  preventOverlap?: boolean;
+};
+
 export type ResourceCalendarTimelineProps = {
   data: CalendarData[];
-  minuteStep?: number
   selectedDate: Date;
   containerStyle?: React.CSSProperties;
   renderResource?: (resource: Resource) => React.ReactNode;
@@ -46,6 +51,7 @@ export type ResourceCalendarTimelineProps = {
   eventContainerStyle?: React.CSSProperties;
   startHour?: number;
   endHour?: number;
+  dragConstraints?: DragConstraintsProps;
 }
 
 export type TComponentProps<

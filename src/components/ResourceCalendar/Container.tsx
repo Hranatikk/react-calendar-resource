@@ -1,5 +1,5 @@
-import React, { useState, useRef, useCallback } from 'react';
-import { CalendarEvent, DragData, DropIndicator, Hour, Resource, ResourceCalendarTimelineProps } from './types';
+import React, { useState, useMemo, useRef, useCallback } from 'react';
+import { CalendarData, CalendarEvent, DragData, DropIndicator, Hour, Resource, ResourceCalendarTimelineProps } from './types';
 import Component from "./Component"
 import { getPastelColor } from './helpers';
 
@@ -14,7 +14,7 @@ const Container = ({
   eventContainerStyle = {},
   startHour,
   endHour,
-  minuteStep = 10,
+  dragConstraints = { minuteStep: 10, preventOverlap: true },
 }: ResourceCalendarTimelineProps) => {
   const [calendarData, setCalendarData] = useState(data);
   const [dropIndicator, setDropIndicator] = useState<DropIndicator>(null);
@@ -101,7 +101,7 @@ const Container = ({
       return;
     }
     const pixelsPerMinute = slotWidth / 60;
-    const stepPx = minuteStep * pixelsPerMinute;
+    const stepPx = (dragConstraints.minuteStep || 15) * pixelsPerMinute;
     const roundedEffectiveDropX = Math.round(effectiveDropX / stepPx) * stepPx;
     const minutesFromStart = roundedEffectiveDropX / pixelsPerMinute;
     const totalMinutes = minutesFromStart + startHourValue * 60;
@@ -111,7 +111,7 @@ const Container = ({
     candidateStart.setHours(newHour, newMinutes, 0, 0);
 
     let valid = true;
-    if (dragDataRef.current) {
+    if (dragConstraints.preventOverlap && dragDataRef.current) {
       const duration = dragDataRef.current.duration;
       const candidateEnd = new Date(candidateStart);
       candidateEnd.setMinutes(candidateEnd.getMinutes() + duration);
