@@ -49,13 +49,19 @@ export default App;
 
 ## Props
 
-| Prop               | Type             | Description                                  |
-|--------------------|----------------|----------------------------------------------|
-| `data`            | `Array`         | List of resources with associated events.    |
-| `startHour`       | `number`        | Starting hour of the timeline.               |
-| `endHour`         | `number`        | Ending hour of the timeline.                 |
-| `onEventDragEnd`  | `Function`      | Callback triggered after an event is moved.  |
-| `renderEvent`     | `Function`      | Custom rendering function for events.        |
+| Prop                | Type                                      | Description                                      |
+|---------------------|-----------------------------------------|--------------------------------------------------|
+| `data`             | `CalendarData[]`                        | List of resources with associated events.       |
+| `minuteStep`       | `number`                                | Step size in minutes for event positioning.     |
+| `selectedDate`     | `Date`                                  | Currently selected date in the calendar.        |
+| `containerStyle`   | `React.CSSProperties`                   | Custom styles for the calendar container.       |
+| `renderResource`   | `(resource: Resource) => React.ReactNode` | Function to render a resource item.             |
+| `renderEvent`      | `(event: CalendarEvent, resource: Resource) => React.ReactNode` | Function to render an event item. |
+| `onEventDragEnd`   | `(newDate: Date, resource: Resource, event: CalendarEvent) => void` | Callback when an event is moved. |
+| `onDoubleClick`    | `(time: Date, resource: Resource) => void` | Callback triggered on double-clicking a time slot. |
+| `eventContainerStyle` | `React.CSSProperties`                 | Custom styles for event containers.             |
+| `startHour`        | `number`                                | Starting hour of the timeline.                  |
+| `endHour`          | `number`                                | Ending hour of the timeline.                    |
 
 ## License
 

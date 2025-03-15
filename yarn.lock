@@ -8130,6 +8130,11 @@ react-app-polyfill@^3.0.0:
     regenerator-runtime "^0.13.9"
     whatwg-fetch "^3.6.2"
 
+react-calendar-resource@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-calendar-resource/-/react-calendar-resource-1.0.1.tgz#60b96ee201e8ef80c0a1e7b04be57b8565454112"
+  integrity sha512-gpyQPcqWFhxh4v3vaNdfwC0Xa+RnZl7u9QfLLTxFBtjyxoB0wtR+KkrAPhrR1LygqrW1KoaGgR3AZsPqWzM4hQ==
+
 react-dev-utils@^12.0.1:
   version "12.0.1"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-12.0.1.tgz#ba92edb4a1f379bd46ccd6bcd4e7bc398df33e73"
