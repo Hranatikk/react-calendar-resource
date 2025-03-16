@@ -24,6 +24,7 @@ const Component = ({
 
   dragDataRef,
   dropIndicator,
+  dragConstraints,
   hours,
   startHourValue,
   slotWidth,
@@ -55,6 +56,7 @@ const Component = ({
       <RightColumn
         collapsedGroups={collapsedGroups}
         calendarData={calendarData}
+        dragConstraints={dragConstraints}
         groupData={groupData}
         timelineWidth={timelineWidth}
         slotWidth={slotWidth}

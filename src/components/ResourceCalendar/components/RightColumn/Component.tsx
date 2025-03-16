@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import React,{ memo } from 'react';
 import { HourSlot } from "../HourSlot";
 import { ResourceRow } from "../ResourceRow";
 import { TComponentProps, TGroupedData } from '../../types';
@@ -16,6 +16,7 @@ type TOmitProps = Omit<TProps, "index" | "hoursLength" | "hour" | "resourceIndex
 
 const Component = ({
   calendarData,
+  dragConstraints,
   groupData,
   timelineWidth,
   slotWidth,
@@ -62,14 +63,15 @@ const Component = ({
 
           else {
             return (
-              <>
+              <React.Fragment key={groupIndex}>
                 {item.group && (
-                  <div key={groupIndex} className="rtc-row-placeholder" />
+                  <div className="rtc-row-placeholder" />
                 )}
 
                 {item.resources.map((resourceData, resourceIndex) => (
                   <ResourceRow
                     key={`${groupIndex}-${resourceIndex}`}
+                    dragConstraints={dragConstraints}
                     resourceData={resourceData}
                     resourceIndex={resourceIndex}
                     calendarData={calendarData}
@@ -90,7 +92,7 @@ const Component = ({
                     onDoubleClick={onDoubleClick}
                   />
                 ))}
-            </>
+            </React.Fragment>
             )
           }
         })}

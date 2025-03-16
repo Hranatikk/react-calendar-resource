@@ -14,6 +14,7 @@ type TComponentProps = {
   slotWidth: number
   left: number
   width: number
+  opacity: number
 
   renderEvent?: (event: CalendarEvent, resource: Resource) => React.ReactNode;
   renderInitialEvent: (event: CalendarEvent, resource: Resource) => React.ReactNode;
@@ -30,6 +31,7 @@ const Component = ({
   eventContainerStyle = {},
   left,
   width,
+  opacity,
 
   renderEvent,
   renderInitialEvent,
@@ -46,6 +48,7 @@ const Component = ({
       style={{
         left,
         width,
+        opacity,
         backgroundColor: eventContainerStyle.backgroundColor || '#fff',
         ...eventContainerStyle,
       }}
