@@ -6,8 +6,8 @@ export type Resource = {
 }
 
 export type CalendarEvent = {
-  start: Date;
-  end: Date;
+  start: Date | string;
+  end: Date | string;
   title?: string;
 }
 
@@ -43,6 +43,7 @@ export type DragData = {
 export type DragConstraintsProps = {
   minuteStep?: number;
   preventOverlap?: boolean;
+  showMinuteStepDivider?: boolean
 };
 
 export type ResourceCalendarTimelineProps = {

@@ -14,7 +14,7 @@ const Container = ({
   eventContainerStyle = {},
   startHour,
   endHour,
-  dragConstraints = { minuteStep: 10, preventOverlap: true },
+  dragConstraints = { minuteStep: 15, preventOverlap: true, showMinuteStepDivider: false },
   groupBy,
 }: ResourceCalendarTimelineProps) => {
   const [calendarData, setCalendarData] = useState(data);
@@ -50,7 +50,6 @@ const Container = ({
     setCollapsedGroups(prev => ({ ...prev, [group]: !prev[group] }));
   };
 
-  // Handle double-click on a time slot.
   const handleDoubleClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
     destinationIndex: number
@@ -131,23 +130,29 @@ const Container = ({
     candidateStart.setHours(newHour, newMinutes, 0, 0);
 
     let valid = true;
+
     if (dragConstraints.preventOverlap && dragDataRef.current) {
       const duration = dragDataRef.current.duration;
       const candidateEnd = new Date(candidateStart);
       candidateEnd.setMinutes(candidateEnd.getMinutes() + duration);
+
       const eventsInRow = calendarData[destinationIndex].events;
       const sourceIndex = dragDataRef.current.resourceIndex;
       const eventIndex = dragDataRef.current.eventIndex;
+
       const filteredEvents =
         sourceIndex === destinationIndex
           ? eventsInRow.filter((_, idx) => idx !== eventIndex)
           : eventsInRow;
+
       valid = !filteredEvents.some((evt) => {
         const evtStart = new Date(evt.start);
         const evtEnd = new Date(evt.end);
+
         return candidateStart < evtEnd && candidateEnd > evtStart;
       });
     }
+
     setDropIndicator({
       rowIndex: destinationIndex,
       x: roundedEffectiveDropX,
@@ -171,26 +176,29 @@ const Container = ({
     }
   };
 
-  // Handle drop: update calendar data if valid; otherwise cancel drag.
   const handleDrop = (
     e: React.DragEvent<HTMLDivElement>,
     destinationIndex: number
   ) => {
     e.preventDefault();
     e.stopPropagation();
+
     if (!dropIndicator || !dropIndicator.valid) {
       handleDragEnd();
       return;
     }
+
     let dragData;
     try {
       dragData = JSON.parse(e.dataTransfer.getData('text/plain'));
     } catch {
       return;
     }
+
     const sourceIndex = dragData.resourceIndex;
     const eventIndex = dragData.eventIndex;
     const candidateStart = dropIndicator.time;
+
     setCalendarData((prevData) => {
       const newData = prevData.map((resource) => ({
         ...resource,
@@ -214,6 +222,7 @@ const Container = ({
       }
       return newData;
     });
+
     if (onEventDragEnd) {
       onEventDragEnd(
         candidateStart,
@@ -221,6 +230,7 @@ const Container = ({
         calendarData[sourceIndex].events[eventIndex]
       );
     }
+
     document.body.style.cursor = 'default';
     dragDataRef.current = null;
     setDropIndicator(null);
@@ -244,6 +254,7 @@ const Container = ({
   return (
     <Component
       collapsedGroups={collapsedGroups}
+      dragConstraints={dragConstraints}
       toggleGroup={toggleGroup}
       groupBy={groupBy as string}
       calendarData={calendarData}

@@ -23,6 +23,7 @@ const Component = ({
   calendarData,
   eventContainerStyle = {},
   dragDataRef,
+  dragConstraints,
   dropIndicator,
   hours,
   startHourValue,
@@ -52,6 +53,7 @@ const Component = ({
         <TimeSlot
           key={index}
           index={index}
+          dragConstraints={dragConstraints}
           slotWidth={slotWidth}
           hoursLength={hours.length}
         />

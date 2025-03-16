@@ -89,7 +89,7 @@
   /* Ghost event during drag */
   .rtc-ghost-event {
     position: absolute;
-    opacity: 0.8;
+    opacity: 1;
     pointer-events: none;
     color: #000;
     font-weight: 600;
@@ -104,6 +104,10 @@
     justify-content: center;
     align-items: center;
     display: flex;
+    z-index: 100;
+    -webkit-box-shadow: 0px 2px 20px -4px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 2px 20px -4px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 2px 20px -4px rgba(34, 60, 80, 0.2);
   }
 
   /* Default event item */
@@ -156,5 +160,12 @@
     border-bottom: 1px solid #ccc;
     height: 35.5px;
     background-color: #f9f9f9;
+  }
+
+  .rtc-hour-step-divider {
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    background-color: #e7e7e7;
   }
   
