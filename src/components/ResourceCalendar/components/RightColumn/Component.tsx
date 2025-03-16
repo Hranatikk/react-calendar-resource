@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { HourSlot } from "../HourSlot";
 import { ResourceRow } from "../ResourceRow";
 import { TComponentProps, TGroupedData } from '../../types';
@@ -6,7 +6,6 @@ import { TComponentProps, TGroupedData } from '../../types';
 type THourSlotProps = TComponentProps<typeof HourSlot>;
 type TResourceRowProps = TComponentProps<typeof ResourceRow>;
 
-// Extend props to receive grouped data and toggle state
 type TProps = Omit<THourSlotProps & TResourceRowProps, "groupData"> & {
   groupData: TGroupedData[]
   timelineWidth: number;

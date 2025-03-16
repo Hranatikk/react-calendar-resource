@@ -1,4 +1,3 @@
-import React from 'react';
 import { TComponentProps, TGroupedData } from '../../types';
 import Component from "./Component"
 
