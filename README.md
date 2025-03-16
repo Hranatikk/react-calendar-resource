@@ -49,18 +49,21 @@ export default App;
 
 ## Props
 
-| Prop                | Type                                      | Description                                      |
-|---------------------|-----------------------------------------|--------------------------------------------------|
-| `data`             | `CalendarData[]`                        | List of resources with associated events.       |
-| `selectedDate`     | `Date`                                  | Currently selected date in the calendar.        |
-| `containerStyle`   | `React.CSSProperties`                   | Custom styles for the calendar container.       |
-| `renderResource`   | `(resource: Resource) => React.ReactNode` | Function to render a resource item.             |
-| `renderEvent`      | `(event: CalendarEvent, resource: Resource) => React.ReactNode` | Function to render an event item. |
-| `onEventDragEnd`   | `(newDate: Date, resource: Resource, event: CalendarEvent) => void` | Callback when an event is moved. |
-| `onDoubleClick`    | `(time: Date, resource: Resource) => void` | Callback triggered on double-clicking a time slot. |
-| `eventContainerStyle` | `React.CSSProperties`                 | Custom styles for event containers.             |
-| `startHour`        | `number`                                | Starting hour of the timeline.                  |
-| `endHour`          | `number`                                | Ending hour of the timeline.                    |
+| Prop                  | Type                                                          | Default                                          | Description                                                                                                                                                                                                  |
+|-----------------------|---------------------------------------------------------------|--------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **data**              | `CalendarData[]`                                              | _None_                                           | An array of calendar data objects. Each object contains a resource and its associated events. This is the primary dataset for rendering the calendar.                                                     |
+| **selectedDate**      | `Date`                                                        | _None_                                           | The current date used as the reference for the timeline. It determines the time slots and event display.                                                                                                     |
+| **containerStyle**    | `React.CSSProperties`                                         | `{}`                                             | Optional inline styles applied to the overall calendar container for custom appearance.                                                                                                                       |
+| **renderResource**    | `(resource: Resource) => React.ReactNode`                     | Renders the resource's title                     | A custom render function for displaying a resource in the left column. Override this to provide a custom layout or additional details.                                                                      |
+| **renderEvent**       | `(event: CalendarEvent, resource: Resource) => React.ReactNode` | Renders a default event view                     | A custom render function for displaying calendar events in the timeline. Customize this to include icons, custom formatting, or additional UI elements.                                                     |
+| **onEventDragEnd**    | `(newDate: Date, resource: Resource, event: CalendarEvent) => void` | _None_                                      | Callback triggered when an event drag-and-drop action is completed. It provides the new start time, the resource, and the event to update your data accordingly.                                          |
+| **onDoubleClick**     | `(time: Date, resource: Resource) => void`                     | _None_                                           | Callback fired when a double-click occurs on a time slot. This can be used to create new events or trigger custom actions.                                                                                     |
+| **eventContainerStyle** | `React.CSSProperties`                                      | `{}`                                             | Optional inline styles applied to the container holding event elements. Useful for customizing event block appearance such as background color, borders, or padding.                                       |
+| **startHour**         | `number`                                                      | `0`                                              | The starting hour for the calendar timeline. This defines the beginning of the time slots displayed in the calendar.                                                                                          |
+| **endHour**           | `number`                                                      | `23`                                             | The ending hour for the timeline, determining the last time slot of the day.                                                                                                                                  |
+| **dragConstraints**   | `DragConstraintsProps`                                        | `{ minuteStep: 10, preventOverlap: true }`         | An object that defines constraints for event dragging: `minuteStep` specifies the snapping increment in minutes, and `preventOverlap` prevents events from overlapping if set to `true`.                |
+| **groupBy**           | `keyof Resource`                                              | _None_                                           | Optional property to group resources based on a specific key from the `Resource` type (e.g., department, floor, specialty). When provided, the calendar groups resources internally and displays toggles. |
+
 
 ## License
 

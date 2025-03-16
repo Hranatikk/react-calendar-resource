@@ -16,6 +16,11 @@ export type CalendarData = {
   events: CalendarEvent[];
 }
 
+export type TGroupedData = {
+  group: string | null;
+  resources: CalendarData[];
+};
+
 export type DropIndicator = {
   rowIndex: number;
   x: number;
@@ -52,6 +57,7 @@ export type ResourceCalendarTimelineProps = {
   startHour?: number;
   endHour?: number;
   dragConstraints?: DragConstraintsProps;
+  groupBy?: keyof Resource;
 }
 
 export type TComponentProps<

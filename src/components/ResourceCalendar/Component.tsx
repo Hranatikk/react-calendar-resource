@@ -1,12 +1,14 @@
 import React, { memo } from 'react';
-import { TComponentProps } from './types';
+import { CalendarData, TComponentProps, TGroupedData } from './types';
 import { LeftColumn, RightColumn } from "./components"
 import './styles.css';
 
 type TLeftColumnProps = TComponentProps<typeof LeftColumn>
 type TRightColumnProps = TComponentProps<typeof RightColumn>
 
-type TProps = TLeftColumnProps & TRightColumnProps & {
+type TProps = Omit<TLeftColumnProps & TRightColumnProps, "calendarData" | "groupData"> & {
+  calendarData: CalendarData[]
+  groupData: TGroupedData[]
   containerStyle?: React.CSSProperties
 }
 
@@ -14,6 +16,11 @@ const Component = ({
   calendarData,
   containerStyle = {},
   eventContainerStyle = {},
+
+  groupBy,
+  groupData,
+  collapsedGroups,
+  toggleGroup,
 
   dragDataRef,
   dropIndicator,
@@ -36,11 +43,19 @@ const Component = ({
   return (
     <div className="rtc-container" style={containerStyle}>
       {/* Left column */}
-      <LeftColumn calendarData={calendarData} renderResource={renderResource} />
+      <LeftColumn
+        calendarData={groupData}
+        groupBy={groupBy}
+        collapsedGroups={collapsedGroups}
+        toggleGroup={toggleGroup}
+        renderResource={renderResource}
+      />
 
       {/* Right column */}
       <RightColumn
+        collapsedGroups={collapsedGroups}
         calendarData={calendarData}
+        groupData={groupData}
         timelineWidth={timelineWidth}
         slotWidth={slotWidth}
         hours={hours}

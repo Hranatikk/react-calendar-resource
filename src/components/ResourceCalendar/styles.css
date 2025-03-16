@@ -11,12 +11,12 @@
   .rtc-left-column {
     width: 200px;
     flex-shrink: 0;
-    border-right: 1px solid #ccc;
   }
   
   .rtc-left-header {
     height: 60px;
     border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
     border-top: none;
     display: flex;
     align-items: center;
@@ -30,6 +30,7 @@
     align-items: center;
     padding-left: 8px;
     box-sizing: border-box;
+    border-right: 1px solid #ccc;
   }
   
   /* Right column (timeline area) */
@@ -128,5 +129,32 @@
   
   .rtc-event:hover .rtc-event-background {
     opacity: .5;
+  }
+
+  /* Group header */
+  .rtc-group-header {
+    padding: 8px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+  }
+
+  .rtc-group-toggle {
+    margin-right: 8px;
+  }
+
+  .rtc-user-placeholder-collapsed {
+    height: 0;
+  }
+
+  .rtc-row-placeholder {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    height: 35.5px;
+    background-color: #f9f9f9;
   }
   

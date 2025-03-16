@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useRef, useCallback } from 'react';
-import { CalendarData, CalendarEvent, DragData, DropIndicator, Hour, Resource, ResourceCalendarTimelineProps } from './types';
+import { CalendarData, CalendarEvent, DragData, DropIndicator, Hour, Resource, ResourceCalendarTimelineProps, TGroupedData } from './types';
 import Component from "./Component"
 import { getPastelColor } from './helpers';
 
@@ -15,6 +15,7 @@ const Container = ({
   startHour,
   endHour,
   dragConstraints = { minuteStep: 10, preventOverlap: true },
+  groupBy,
 }: ResourceCalendarTimelineProps) => {
   const [calendarData, setCalendarData] = useState(data);
   const [dropIndicator, setDropIndicator] = useState<DropIndicator>(null);
@@ -29,6 +30,25 @@ const Container = ({
     return { hour, label: hour.toString().padStart(2, '0') + ':00' };
   });
   const timelineWidth = (endHourValue - startHourValue + 1) * slotWidth;
+
+  const groupedData: TGroupedData[] = useMemo(() => {
+    if (!groupBy) return [{ group: null, resources: calendarData }];
+
+    const groups = calendarData.reduce((acc, resourceData) => {
+      const groupKey = resourceData.resource[groupBy] || "Other";
+      if (!acc[groupKey]) acc[groupKey] = [];
+      acc[groupKey].push(resourceData);
+      return acc;
+    }, {} as Record<string, CalendarData[]>);
+
+    return Object.entries(groups).map(([group, resources]) => ({ group, resources }));
+  }, [calendarData, groupBy]);
+
+  const [collapsedGroups, setCollapsedGroups] = useState<Record<string, boolean>>({});
+
+  const toggleGroup = (group: string) => {
+    setCollapsedGroups(prev => ({ ...prev, [group]: !prev[group] }));
+  };
 
   // Handle double-click on a time slot.
   const handleDoubleClick = (
@@ -223,7 +243,11 @@ const Container = ({
 
   return (
     <Component
+      collapsedGroups={collapsedGroups}
+      toggleGroup={toggleGroup}
+      groupBy={groupBy as string}
       calendarData={calendarData}
+      groupData={groupedData}
       containerStyle={containerStyle}
       eventContainerStyle={eventContainerStyle}
       dragDataRef={dragDataRef}
