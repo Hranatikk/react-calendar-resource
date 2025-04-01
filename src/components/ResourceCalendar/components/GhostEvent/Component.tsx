@@ -1,17 +1,17 @@
-import React, { memo } from 'react';
-import { CalendarData, CalendarEvent, DragData, DropIndicator, Resource } from '../../types';
+import React, { memo } from "react"
+import { CalendarData, CalendarEvent, DragData, DropIndicator, Resource } from "../../types"
 
 type TComponentProps = {
   calendarData: CalendarData[]
-  eventContainerStyle?: React.CSSProperties;
+  eventContainerStyle?: React.CSSProperties
   
   dragDataRef: React.RefObject<DragData>
   dropIndicator: DropIndicator
   slotWidth: number
   resourceIndex: number
 
-  renderEvent?: (event: CalendarEvent, resource: Resource) => React.ReactNode;
-  renderInitialEvent: (event: CalendarEvent, resource: Resource) => React.ReactNode;
+  renderEvent?: (event: CalendarEvent, resource: Resource) => React.ReactNode
+  renderInitialEvent: (event: CalendarEvent, resource: Resource) => React.ReactNode
 }
 
 const Component = ({
@@ -37,7 +37,7 @@ const Component = ({
     style={{
       left: dropIndicator.x,
       width: dragDataRef.current.duration * (slotWidth / 60),
-      backgroundColor: eventContainerStyle.backgroundColor || '#fff',
+      backgroundColor: eventContainerStyle.backgroundColor || "#fff",
       ...eventContainerStyle,
     }}
   >
@@ -49,7 +49,7 @@ const Component = ({
       : renderInitialEvent(calendarData[dragDataRef.current.resourceIndex].events[dragDataRef.current.eventIndex],
         calendarData[dragDataRef.current.resourceIndex].resource)}
   </div>
-  );
-};
+  )
+}
 
-export default memo(Component);
+export default memo(Component)

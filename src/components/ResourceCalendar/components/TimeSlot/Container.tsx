@@ -1,34 +1,18 @@
-import { useMemo } from 'react';
-import { DragConstraintsProps, TComponentProps } from '../../types';
+import { useMemo } from "react"
+import { DragConstraintsProps, TComponentProps } from "../../types"
 import Component from "./Component"
+import { getStepData } from "./helpers/getStepData"
+import { useCalendarContext } from "../../../../context/CalendarContext"
 
-type TProps = Omit<TComponentProps<typeof Component>, "stepData"> & {
-  dragConstraints: DragConstraintsProps
-}
+type TProps = Pick<TComponentProps<typeof Component>, "index">
 
-const Container = ({dragConstraints, slotWidth, ...props}: TProps) => {
-  
-  const data = useMemo(() => {
-    if (!dragConstraints.showMinuteStepDivider || !dragConstraints.minuteStep) {
-      return []
-    } else {
-      const numberOfCell = Math.round(60 / dragConstraints.minuteStep)
-      const numberOfDivider = numberOfCell - 1
-      const dividerStepInPx = slotWidth / numberOfCell
-
-      const arrayOfRows = Array.from(Array(numberOfDivider).keys()).map((i, index) => {
-        return {
-          left: (dividerStepInPx * (index+1)) - 1,
-        }
-      })
-
-      return arrayOfRows
-    }
-  }, [dragConstraints, slotWidth])
+const Container = ({ index }: TProps) => {
+  const { dragConstraints, slotWidth, hours } = useCalendarContext()
+  const data = useMemo(() => getStepData(dragConstraints, slotWidth), [dragConstraints, slotWidth])
 
   return (
-    <Component {...props} slotWidth={slotWidth} stepData={data} />
-  );
-};
+    <Component index={index} slotWidth={slotWidth} stepData={data} hoursLength={hours.length} />
+  )
+}
 
-export default Container;
+export default Container

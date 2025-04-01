@@ -1,15 +1,10 @@
-import React, { memo } from 'react';
-import { CalendarData, Hour, TComponentProps } from '../../types';
+import React, { memo } from "react"
+import { CalendarData, Hour } from "../../types"
 import { Event } from "../Event"
 import { GhostEvent } from "../GhostEvent"
 import { TimeSlot } from "../TimeSlot"
 
-
-type TEventProps = Omit<TComponentProps<typeof Event>, "eventIndex" | "event">
-type TGhostEventProps = TComponentProps<typeof GhostEvent>
-type TTimeSlotProps = Omit<TComponentProps<typeof TimeSlot>, "index" | "hoursLength">
-
-type TProps = TEventProps & TGhostEventProps & TTimeSlotProps & {
+type TProps = {
   resourceData: CalendarData
   resourceIndex: number
   hours: Hour[]
@@ -20,19 +15,9 @@ type TProps = TEventProps & TGhostEventProps & TTimeSlotProps & {
 }
 
 const Component = ({
-  calendarData,
-  eventContainerStyle = {},
-  dragDataRef,
-  dragConstraints,
-  dropIndicator,
   hours,
-  startHourValue,
-  slotWidth,
   resourceData,
   resourceIndex,
-  renderEvent,
-  onDragStart,
-  onDragEnd,
   onDragOver,
   onDragLeave,
   onDrop,
@@ -40,7 +25,6 @@ const Component = ({
 }: TProps) => {
   return (
     <div
-      key={resourceIndex}
       className="rtc-row"
       onDragOver={(e) => onDragOver(e, resourceIndex)}
       onDragLeave={onDragLeave}
@@ -48,26 +32,10 @@ const Component = ({
       onDoubleClick={(e) => onDoubleClick(e, resourceIndex)}
     >
       {/* Time slots */}
-      {hours.map((hourObj, index) => (
-        <TimeSlot
-          key={index}
-          index={index}
-          dragConstraints={dragConstraints}
-          slotWidth={slotWidth}
-          hoursLength={hours.length}
-        />
-      ))}
+      {hours.map((hourObj, index) => <TimeSlot key={index} index={index} />)}
 
       {/* Ghost element during drag */}
-      <GhostEvent
-        calendarData={calendarData}
-        eventContainerStyle={eventContainerStyle}
-        dragDataRef={dragDataRef}
-        dropIndicator={dropIndicator}
-        slotWidth={slotWidth}
-        resourceIndex={resourceIndex}
-        renderEvent={renderEvent}
-      />
+      <GhostEvent resourceIndex={resourceIndex} />
 
       {/* Normal events */}
       {resourceData.events.map((evt, eventIndex) => (
@@ -77,18 +45,10 @@ const Component = ({
           eventIndex={eventIndex}
           event={evt}
           resourceData={resourceData}
-          eventContainerStyle={eventContainerStyle}
-          dragDataRef={dragDataRef}
-          dropIndicator={dropIndicator}
-          startHourValue={startHourValue}
-          slotWidth={slotWidth}
-          renderEvent={renderEvent}
-          onDragStart={onDragStart}
-          onDragEnd={onDragEnd}
         />
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default memo(Component);
+export default memo(Component)

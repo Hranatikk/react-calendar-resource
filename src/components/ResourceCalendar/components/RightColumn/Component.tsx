@@ -1,42 +1,27 @@
-import React,{ memo } from 'react';
-import { HourSlot } from "../HourSlot";
-import { ResourceRow } from "../ResourceRow";
-import { TComponentProps, TGroupedData } from '../../types';
+import React,{ memo } from "react"
+import { HourSlot } from "../HourSlot"
+import { ResourceRow } from "../ResourceRow"
+import { TGroupedData, Hour } from "../../types"
 
-type THourSlotProps = TComponentProps<typeof HourSlot>;
-type TResourceRowProps = TComponentProps<typeof ResourceRow>;
-
-type TProps = Omit<THourSlotProps & TResourceRowProps, "groupData"> & {
+type TProps = {
+  collapsedGroups: Record<string, boolean>
   groupData: TGroupedData[]
-  timelineWidth: number;
-  collapsedGroups: Record<string, boolean>;
-};
-
-type TOmitProps = Omit<TProps, "index" | "hoursLength" | "hour" | "resourceIndex" | "resourceData">;
+  timelineWidth: number
+  slotWidth: number
+  hours: Hour[]
+}
 
 const Component = ({
-  calendarData,
-  dragConstraints,
+  collapsedGroups,
   groupData,
   timelineWidth,
   slotWidth,
   hours,
-  eventContainerStyle,
-  dragDataRef,
-  dropIndicator,
-  startHourValue,
-  renderEvent,
-  onDragStart,
-  onDragEnd,
-  onDragOver,
-  onDragLeave,
-  onDrop,
-  onDoubleClick,
-  collapsedGroups,
-}: TOmitProps & { collapsedGroups: Record<string, boolean> }) => {
+}: TProps) => {
   return (
     <div className="rtc-right-column">
       <div className="rtc-timeline" style={{ width: timelineWidth }}>
+
         {/* Header row */}
         <div className="rtc-time-header">
           {hours.map((hourObj, index) => (
@@ -51,13 +36,13 @@ const Component = ({
         </div>
 
         {groupData.map((item, groupIndex) => {
-          const groupKey = item.group || 'Other';
-          const isCollapsed = collapsedGroups[groupKey];
+          const groupKey = item.group || "Other"
+          const isCollapsed = collapsedGroups[groupKey]
 
           if (isCollapsed) {
             return (
               <div key={groupIndex} className="rtc-row-placeholder" />
-            );
+            )
           }
 
           else {
@@ -70,24 +55,9 @@ const Component = ({
                 {item.resources.map((resourceData, resourceIndex) => (
                   <ResourceRow
                     key={`${groupIndex}-${resourceIndex}`}
-                    dragConstraints={dragConstraints}
                     resourceData={resourceData}
                     resourceIndex={resourceIndex}
-                    calendarData={calendarData}
                     groupData={item}
-                    eventContainerStyle={eventContainerStyle}
-                    dragDataRef={dragDataRef}
-                    dropIndicator={dropIndicator}
-                    hours={hours}
-                    startHourValue={startHourValue}
-                    slotWidth={slotWidth}
-                    renderEvent={renderEvent}
-                    onDragStart={onDragStart}
-                    onDragEnd={onDragEnd}
-                    onDragOver={onDragOver}
-                    onDragLeave={onDragLeave}
-                    onDrop={onDrop}
-                    onDoubleClick={onDoubleClick}
                   />
                 ))}
             </React.Fragment>
@@ -96,7 +66,7 @@ const Component = ({
         })}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default memo(Component);
+export default memo(Component)

@@ -256,27 +256,14 @@ const CalendarProvider = ({
         calendarData={calendarData}
         collapsedGroups={collapsedGroups}
         containerStyle={containerStyle}
-        dragConstraints={dragConstraints}
-        dragDataRef={dragDataRef}
-        dropIndicator={dropIndicator}
-        eventContainerStyle={eventContainerStyle}
         groupBy={groupBy as string}
         groupData={groupedData}
         hours={hours}
         slotWidth={slotWidth}
-        startHourValue={startHourValue}
         timelineWidth={timelineWidth}
         toggleGroup={toggleGroup}
 
-        renderEvent={renderEvent}
         renderResource={renderResource}
-
-        onDoubleClick={handleDoubleClick}
-        onDragEnd={handleDragEnd}
-        onDragLeave={handleDragLeave}
-        onDragOver={handleDragOver}
-        onDragStart={handleDragStart}
-        onDrop={handleDrop}
       />
     </CalendarContext.Provider>
   )

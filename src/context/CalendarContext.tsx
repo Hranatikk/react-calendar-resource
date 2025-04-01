@@ -1,4 +1,4 @@
-import { createContext } from "react"
+import { createContext, useContext, type Context } from "react"
 import type {
   CalendarData,
   CalendarEvent,
@@ -10,7 +10,7 @@ import type {
   Hour,
 } from "../components/ResourceCalendar/types"
 
-type TContextData = {
+export type TContextData = {
   calendarData: CalendarData[]
   collapsedGroups: Record<string, boolean>
   containerStyle: React.CSSProperties
@@ -21,7 +21,7 @@ type TContextData = {
   groupBy?: string
   groupData: TGroupedData[]
   hours: Hour[]
-  slotWidth?: number
+  slotWidth: number
   startHourValue: number
   timelineWidth: number
   toggleGroup: (group: string) => void
@@ -38,3 +38,4 @@ type TContextData = {
 }
 
 export const CalendarContext = createContext<TContextData | null>(null)
+export const useCalendarContext = () => useContext<TContextData>(CalendarContext as Context<TContextData>)

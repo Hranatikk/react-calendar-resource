@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo } from "react"
 
 type TComponentProps = {
   index: number
@@ -22,14 +22,14 @@ const Component = ({
       style={{
         left: index * slotWidth,
         width: slotWidth,
-        borderRight: index === hoursLength - 1 ? 'none' : undefined,
+        borderRight: index === hoursLength - 1 ? "none" : undefined,
       }}
     >
       {stepData.map((step, stepIndex) => (
-        <div key={`${stepIndex}-${index}`} className='rtc-hour-step-divider' style={{ left: step.left }} />
+        <div key={`${stepIndex}-${index}`} className="rtc-hour-step-divider" style={{ left: step.left }} />
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default memo(Component);
+export default memo(Component)

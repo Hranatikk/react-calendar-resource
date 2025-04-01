@@ -1,12 +1,18 @@
-import { TComponentProps } from '../../types';
+import { useCalendarContext } from "../../../../context/CalendarContext"
 import Component from "./Component"
 
-type TProps = TComponentProps<typeof Component>
+const Container = () => {
+  const { groupData, timelineWidth, slotWidth, hours, collapsedGroups } = useCalendarContext()
 
-const Container = (props: TProps) => {
   return (
-    <Component {...props} />
-  );
-};
+    <Component
+      groupData={groupData}
+      timelineWidth={timelineWidth}
+      slotWidth={slotWidth}
+      hours={hours}
+      collapsedGroups={collapsedGroups}
+    />
+  )
+}
 
-export default Container;
+export default Container

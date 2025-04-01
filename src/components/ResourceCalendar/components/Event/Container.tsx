@@ -1,50 +1,46 @@
 import { useCallback } from "react"
-import { TComponentProps } from '../../types';
-import Component from './Component';
+import { TComponentProps } from "../../types"
+import Component from "./Component"
 import type { CalendarEvent, Resource } from "../../types"
 import { getPastelColor } from "../../helpers"
+import { getEventStyles } from "./helpers/getEventStyles"
+import { useCalendarContext } from "../../../../context/CalendarContext"
 
-type TProps = Omit<TComponentProps<typeof Component>, "left" | "width" | "opacity" | "renderInitialEvent">
+type TProps = Pick<
+  TComponentProps<typeof Component>, 
+  "event" | "eventIndex"| "resourceIndex" | "resourceData"
+>
 
 const Container = ({
   resourceIndex,
   eventIndex,
-  event,
   resourceData,
-  eventContainerStyle = {},
-
-  dragDataRef,
-  dropIndicator,
-  startHourValue,
-  slotWidth,
-
-  renderEvent,
-
-  onDragStart,
-  onDragEnd,
+  event,
 }: TProps) => {
-  let opacity = 1
+  const { 
+    dragDataRef,
+    dropIndicator,
+    eventContainerStyle,
+    slotWidth,
+    startHourValue,
 
-  if (
-    dragDataRef.current &&
-    dragDataRef.current.resourceIndex === resourceIndex &&
-    dragDataRef.current.eventIndex === eventIndex &&
-    dropIndicator
-  ) {
-    opacity = 0.3
-  }
-  const eventStart = new Date(event.start);
-  const eventEnd = new Date(event.end);
-  const startMinutes =
-    eventStart.getHours() * 60 + eventStart.getMinutes() - startHourValue * 60;
-  const endMinutes =
-    eventEnd.getHours() * 60 + eventEnd.getMinutes() - startHourValue * 60;
-  const pixelsPerMinute = slotWidth / 60;
-  const left = startMinutes * pixelsPerMinute;
-  const width = (endMinutes - startMinutes) * pixelsPerMinute;
+    renderEvent,
+    onDragStart,
+    onDragEnd,
+   } = useCalendarContext()
+
+  const { left, width, opacity } = getEventStyles(
+    dragDataRef,
+    dropIndicator,
+    event,
+    eventIndex,
+    resourceIndex,
+    slotWidth,
+    startHourValue,
+  )
 
   const renderInitialEvent = useCallback((evt: CalendarEvent, resource: Resource) => {
-    const resourceColor = getPastelColor(resource.title ?? "");
+    const resourceColor = getPastelColor(resource.title ?? "")
 
     return (
       <>
@@ -54,7 +50,7 @@ const Container = ({
 
         <div className="rtc-event-background" style={{ backgroundColor: resourceColor }} />
       </>
-    );
+    )
   }, [])
 
   return (
@@ -69,6 +65,7 @@ const Container = ({
       dropIndicator={dropIndicator}
       startHourValue={startHourValue}
       slotWidth={slotWidth}
+
       left={left}
       width={width}
       opacity={opacity}
@@ -80,7 +77,7 @@ const Container = ({
       onDragEnd={onDragEnd}
     />
 
-  );
-};
+  )
+}
 
-export default Container;
+export default Container

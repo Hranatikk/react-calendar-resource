@@ -1,7 +1,7 @@
-import React, { memo } from 'react';
-import { CalendarData, TComponentProps, TGroupedData } from './types';
+import React, { memo } from "react"
+import { CalendarData, TComponentProps, TGroupedData } from "./types"
 import { LeftColumn, RightColumn } from "./components"
-import './styles.css';
+import "./styles.css"
 
 type TLeftColumnProps = TComponentProps<typeof LeftColumn>
 type TRightColumnProps = TComponentProps<typeof RightColumn>
@@ -73,7 +73,7 @@ const Component = ({
         onDoubleClick={onDoubleClick}
       />
     </div>
-  );
-};
+  )
+}
 
-export default memo(Component);
+export default memo(Component)
