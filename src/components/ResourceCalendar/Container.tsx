@@ -236,20 +236,6 @@ const Container = ({
     e.dataTransfer.clearData();
   };
 
-  const renderInitialEvent = useCallback((evt: CalendarEvent, resource: Resource) => {
-    const resourceColor = getPastelColor(resource.title ?? "");
-
-    return (
-      <>
-        <div className="rtc-event-item">
-          {evt.title}
-        </div>
-
-        <div className="rtc-event-background" style={{ backgroundColor: resourceColor }} />
-      </>
-    );
-  }, [])
-
   return (
     <Component
       collapsedGroups={collapsedGroups}
@@ -268,7 +254,6 @@ const Container = ({
       timelineWidth={timelineWidth}
       renderResource={renderResource}
       renderEvent={renderEvent}
-      renderInitialEvent={renderInitialEvent}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       onDragOver={handleDragOver}

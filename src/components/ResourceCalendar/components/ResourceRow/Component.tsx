@@ -31,7 +31,6 @@ const Component = ({
   resourceData,
   resourceIndex,
   renderEvent,
-  renderInitialEvent,
   onDragStart,
   onDragEnd,
   onDragOver,
@@ -68,7 +67,6 @@ const Component = ({
         slotWidth={slotWidth}
         resourceIndex={resourceIndex}
         renderEvent={renderEvent}
-        renderInitialEvent={renderInitialEvent}
       />
 
       {/* Normal events */}
@@ -85,7 +83,6 @@ const Component = ({
           startHourValue={startHourValue}
           slotWidth={slotWidth}
           renderEvent={renderEvent}
-          renderInitialEvent={renderInitialEvent}
           onDragStart={onDragStart}
           onDragEnd={onDragEnd}
         />

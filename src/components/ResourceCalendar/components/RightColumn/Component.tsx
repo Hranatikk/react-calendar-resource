@@ -26,7 +26,6 @@ const Component = ({
   dropIndicator,
   startHourValue,
   renderEvent,
-  renderInitialEvent,
   onDragStart,
   onDragEnd,
   onDragOver,
@@ -83,7 +82,6 @@ const Component = ({
                     startHourValue={startHourValue}
                     slotWidth={slotWidth}
                     renderEvent={renderEvent}
-                    renderInitialEvent={renderInitialEvent}
                     onDragStart={onDragStart}
                     onDragEnd={onDragEnd}
                     onDragOver={onDragOver}

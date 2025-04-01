@@ -32,7 +32,6 @@ const Component = ({
 
   renderResource,
   renderEvent,
-  renderInitialEvent,
 
   onDragStart,
   onDragEnd,
@@ -66,7 +65,6 @@ const Component = ({
         dropIndicator={dropIndicator}
         startHourValue={startHourValue}
         renderEvent={renderEvent}
-        renderInitialEvent={renderInitialEvent}
         onDragStart={onDragStart}
         onDragEnd={onDragEnd}
         onDragOver={onDragOver}
