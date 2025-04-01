@@ -59,6 +59,14 @@
     line-height: 60px;
     border-right: 1px solid #ccc;
   }
+
+  .rtc-time-slot-unavailable {
+    background-color: #e6e6e6;
+  }
+
+  .rtc-time-slot-unavailable .rtc-hour-step-divider {
+    background-color: #e6e6e6;
+  }
   
   /* Timeline row for each user */
   .rtc-row {

@@ -18,7 +18,7 @@ const Component = ({
   return (
     <div
       key={index}
-      className="rtc-time-slot"
+    className={`rtc-time-slot ${index % 2 == 0 && "rtc-time-slot-unavailable"}`}
       style={{
         left: index * slotWidth,
         width: slotWidth,
