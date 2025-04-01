@@ -3,7 +3,9 @@
   "version": "1.0.13",
   "description": "React Calendar Resource is an interactive and customizable React component that provides a timeline view for resource scheduling. It features a two-column layout—with resources on the left and a dynamic time grid on the right—and supports intuitive drag-and-drop functionality, event creation, and editing with ghost event feedback during interactions.",
   "scripts": {
-    "rollup": "rollup -c --bundleConfigAsCjs"
+    "rollup": "rollup -c --bundleConfigAsCjs",
+    "link-local": "yarn link && cd node_modules/react && yarn link && cd ../react-dom && yarn link",
+    "unlink-local": "yarn unlink && cd node_modules/react && yarn unlink && cd ../react-dom && yarn unlink"
   },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

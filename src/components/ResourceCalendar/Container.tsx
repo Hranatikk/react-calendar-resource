@@ -16,12 +16,11 @@ const Container = ({
   endHour,
   dragConstraints = { minuteStep: 15, preventOverlap: true, showMinuteStepDivider: false },
   groupBy,
+  slotWidth = 120,
 }: ResourceCalendarTimelineProps) => {
   const [calendarData, setCalendarData] = useState(data);
   const [dropIndicator, setDropIndicator] = useState<DropIndicator>(null);
   const dragDataRef = useRef<DragData>(null);
-
-  const slotWidth = 120; // width of one time slot (px)
 
   const startHourValue = typeof startHour === 'number' ? startHour : 0;
   const endHourValue = typeof endHour === 'number' ? endHour : 23;

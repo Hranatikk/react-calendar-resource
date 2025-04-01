@@ -60,6 +60,7 @@ export type ResourceCalendarTimelineProps = {
   endHour?: number;
   dragConstraints?: DragConstraintsProps;
   groupBy?: keyof Resource;
+  slotWidth?: number
 }
 
 export type TComponentProps<

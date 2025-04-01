@@ -73,6 +73,7 @@ export default App;
 | **endHour**             | `number`                                                      | `23`                                             | The ending hour for the timeline, determining the last time slot of the day.                                                                                                                                  |
 | **dragConstraints**     | `DragConstraintsProps`                                        | `{ minuteStep: 10, preventOverlap: true, showMinuteStepDivider: false }`         | An object that defines constraints for event dragging: `minuteStep` specifies the snapping increment in minutes, `preventOverlap` prevents events from overlapping if set to `true` and `showMinuteStepDivider` will add dividers to hour slots.                |
 | **groupBy**             | `keyof Resource`                                              | _None_                                           | Optional property to group resources based on a specific key from the `Resource` type (e.g., department, floor, specialty). When provided, the calendar groups resources internally and displays toggles. |
+| **slotWidth**             | `number`                                              | 120                                           | Optional Default time slot width |
 
 ## License
 
