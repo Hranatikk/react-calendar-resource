@@ -2,6 +2,7 @@ import type { ComponentProps, ReactNode } from "react"
 
 export type Resource = {
   title: string;
+  id: number
   [key: string]: any;
 }
 

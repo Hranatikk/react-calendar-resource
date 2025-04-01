@@ -8,7 +8,7 @@ type TProps = TComponentProps<typeof Component> & {
 const Container = (props: TProps) => {
   const resourceIndex =
     props.calendarData.findIndex((i) =>
-      i.resource.title === props.groupData.resources[props.resourceIndex].resource.title
+      i.resource.id === props.groupData.resources[props.resourceIndex].resource.id
     )
 
   return (
