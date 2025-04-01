@@ -18,7 +18,7 @@ const Component = ({
   return (
     <div
       key={index}
-    className={`rtc-time-slot ${index % 2 == 0 && "rtc-time-slot-unavailable"}`}
+      className={`rtc-time-slot`}
       style={{
         left: index * slotWidth,
         width: slotWidth,
@@ -26,7 +26,11 @@ const Component = ({
       }}
     >
       {stepData.map((step, stepIndex) => (
-        <div key={`${stepIndex}-${index}`} className="rtc-hour-step-divider" style={{ left: step.left }} />
+        <div
+          key={`${stepIndex}-${index}`}
+          className="rtc-hour-step-divider"
+          style={{ left: step.left }}
+        />
       ))}
     </div>
   )

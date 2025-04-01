@@ -1,8 +1,12 @@
 import React, { useState, useMemo, useRef } from "react"
 import Component from "./Component"
 import { 
-  CalendarData, DragData, DropIndicator, Hour, 
-  ResourceCalendarTimelineProps, TGroupedData 
+  CalendarData,
+  DragData,
+  DropIndicator,
+  Hour, 
+  ResourceCalendarTimelineProps,
+  TGroupedData,
 } from "./types"
 import { CalendarContext } from "../../context/CalendarContext"
 
@@ -252,19 +256,7 @@ const CalendarProvider = ({
 
   return (
     <CalendarContext.Provider value={contextValue}>
-      <Component
-        calendarData={calendarData}
-        collapsedGroups={collapsedGroups}
-        containerStyle={containerStyle}
-        groupBy={groupBy as string}
-        groupData={groupedData}
-        hours={hours}
-        slotWidth={slotWidth}
-        timelineWidth={timelineWidth}
-        toggleGroup={toggleGroup}
-
-        renderResource={renderResource}
-      />
+      <Component containerStyle={containerStyle} />
     </CalendarContext.Provider>
   )
 }

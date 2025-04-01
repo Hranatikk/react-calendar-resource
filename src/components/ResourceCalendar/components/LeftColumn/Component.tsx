@@ -1,16 +1,16 @@
-import React, { memo } from 'react';
-import { TGroupedData, Resource } from '../../types';
+import React, { memo } from "react"
+import { TGroupedData, Resource } from "../../types"
 
 type TComponentProps = {
-  calendarData: TGroupedData[];
-  groupBy?: string;
-  renderResource?: (resource: Resource) => React.ReactNode;
-  collapsedGroups: Record<string, boolean>;
-  toggleGroup: (group: string) => void;
-};
+  groupedData: TGroupedData[]
+  groupBy?: string
+  renderResource?: (resource: Resource) => React.ReactNode
+  collapsedGroups: Record<string, boolean>
+  toggleGroup: (group: string) => void
+}
 
 const Component = ({
-  calendarData,
+  groupedData,
   groupBy,
   renderResource,
   collapsedGroups,
@@ -20,15 +20,15 @@ const Component = ({
     <div className="rtc-left-column">
       <div className="rtc-left-header">Resource</div>
 
-      {calendarData.map((groupData, groupIndex) => {
-        const groupKey = groupData.group || 'Other';
-        const isCollapsed = collapsedGroups[groupKey];
+      {groupedData.map((groupData, groupIndex) => {
+        const groupKey = groupData.group || "Other"
+        const isCollapsed = collapsedGroups[groupKey]
 
         return (
           <React.Fragment key={groupIndex}>
             {groupBy && groupData.group && (
               <div className="rtc-group-header" onClick={() => toggleGroup(groupKey)}>
-                <span className="rtc-group-toggle">{isCollapsed ? '▸' : '▾'}</span>
+                <span className="rtc-group-toggle">{isCollapsed ? "▸" : "▾"}</span>
                 {groupKey}
               </div>
             )}
@@ -43,10 +43,10 @@ const Component = ({
               ))
             )}
           </React.Fragment>
-        );
+        )
       })}
     </div>
-  );
-};
+  )
+}
 
-export default memo(Component);
+export default memo(Component)

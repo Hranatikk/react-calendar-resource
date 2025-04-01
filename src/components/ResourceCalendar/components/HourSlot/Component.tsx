@@ -1,31 +1,31 @@
-import { memo } from 'react';
-import { Hour } from '../../types';
+import { memo } from "react"
+import { Hour } from "../../types"
 
 type TComponentProps = {
-  index: number
   slotWidth: number
-  hoursLength: number
+  left: number
   hour: Hour
+  borderRight: "none" | undefined
 }
 
 const Component = ({
-  index,
   slotWidth,
-  hoursLength,
+  left,
+  borderRight,
   hour,
 }: TComponentProps) => {
   return (
     <div
       className="rtc-time-slot"
       style={{
-        left: index * slotWidth,
+        borderRight,
+        left,
         width: slotWidth,
-        borderRight: index === hoursLength - 1 ? 'none' : undefined,
       }}
     >
       {hour.label}
     </div>
-  );
-};
+  )
+}
 
-export default memo(Component);
+export default memo(Component)

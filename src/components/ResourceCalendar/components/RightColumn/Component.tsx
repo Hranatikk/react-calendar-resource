@@ -7,7 +7,6 @@ type TProps = {
   collapsedGroups: Record<string, boolean>
   groupData: TGroupedData[]
   timelineWidth: number
-  slotWidth: number
   hours: Hour[]
 }
 
@@ -15,7 +14,6 @@ const Component = ({
   collapsedGroups,
   groupData,
   timelineWidth,
-  slotWidth,
   hours,
 }: TProps) => {
   return (
@@ -25,13 +23,7 @@ const Component = ({
         {/* Header row */}
         <div className="rtc-time-header">
           {hours.map((hourObj, index) => (
-            <HourSlot
-              key={index}
-              index={index}
-              slotWidth={slotWidth}
-              hoursLength={hours.length}
-              hour={hourObj}
-            />
+            <HourSlot key={index} index={index} hour={hourObj} />
           ))}
         </div>
 
