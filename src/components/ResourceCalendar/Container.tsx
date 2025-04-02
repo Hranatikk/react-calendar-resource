@@ -85,7 +85,7 @@ const CalendarProvider = ({
     e.dataTransfer.effectAllowed = "move"
 
     const emptyImg = document.createElement("img")
-    emptyImg.src = "data:image/gifbase64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+    emptyImg.src = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
     emptyImg.style.position = "absolute"
     emptyImg.style.top = "-1000px"
     emptyImg.style.left = "-1000px"
